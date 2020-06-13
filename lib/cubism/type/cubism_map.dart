@@ -1,38 +1,38 @@
-class CsmPair<_KeyT, _ValT> {
+class CubismPair<_KeyT, _ValT> {
   _KeyT first;
   _ValT second;
 
-  CsmPair({_KeyT key, _ValT value}) {
+  CubismPair({_KeyT key, _ValT value}) {
     first = key;
     second = value;
   }
 }
 
-class CsmMap<_KeyT, _ValT> {
+class CubismMap<_KeyT, _ValT> {
   static const defaultSize = 10;
 
   // Fixed-sized List
-  List<CsmPair<_KeyT, _ValT>> _keyValues;
+  List<CubismPair<_KeyT, _ValT>> _keyValues;
   int _size;
 
-  CsmMap(int size) {
+  CubismMap(int size) {
     if (size != null) {
       if (size < 1) {
-        _keyValues = <CsmPair<_KeyT, _ValT>>[];
+        _keyValues = <CubismPair<_KeyT, _ValT>>[];
         _size = 0;
       } else {
         _keyValues = List(size);
         _size = size;
       }
     } else {
-      _keyValues = <CsmPair<_KeyT, _ValT>>[];
+      _keyValues = <CubismPair<_KeyT, _ValT>>[];
       _size = 0;
     }
   }
 
   void appendKey(_KeyT key) {
     prepareCapacity(_size + 1);
-    _keyValues[_size] = CsmPair<_KeyT, _ValT>(key: key);
+    _keyValues[_size] = CubismPair<_KeyT, _ValT>(key: key);
     _size += 1;
   }
 
@@ -89,8 +89,8 @@ class CsmMap<_KeyT, _ValT> {
   void prepareCapacity(int newSize, {bool fitToSize = false}) {
     if (newSize > _keyValues.length) {
       if (_keyValues.isEmpty) {
-        if (!fitToSize && newSize < CsmMap.defaultSize) {
-          _keyValues.length = CsmMap.defaultSize;
+        if (!fitToSize && newSize < CubismMap.defaultSize) {
+          _keyValues.length = CubismMap.defaultSize;
         } else {
           _keyValues.length = newSize;
         }
