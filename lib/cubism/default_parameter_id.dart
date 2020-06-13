@@ -32,7 +32,7 @@ class DefaultParameterID {
   static const partsArmLPrefix = 'Parts01ArmL_';
   static const partsArmRPrefix = 'Parts01ArmR_';
 
-  DefaultParameterID(); // Parameter ID
+  // Parameter ID
   static const paramAngleX = 'ParamAngleX';
   static const paramAngleY = 'ParamAngleY';
   static const paramAngleZ = 'ParamAngleZ';
