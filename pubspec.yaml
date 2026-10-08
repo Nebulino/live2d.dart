@@ -1,21 +1,25 @@
 name: live2d
-description: Give Life to your Drawings. Moe-fy your Life.
-version: 0.0.1
-author: Nebulino
-homepage: https://nebulino.cloud/blog
+description: A high-performance, cross-platform Live2D Cubism viewer and controller for Flutter, powered by WebGL and WebView.
+version: 1.0.0
+homepage: https://github.com/Nebulino/live2d.dart
+repository: https://github.com/Nebulino/live2d.dart
+issue_tracker: https://github.com/Nebulino/live2d.dart/issues
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  webview_flutter: ^4.10.0
+  mime: ^1.0.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^5.0.0
 
-  lint: ^1.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

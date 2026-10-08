@@ -1,77 +1,73 @@
-/*
- * Copyright (c) 2020.
- * Author: Nebulino
- * Site: https://nebulino.cloud/blog
- * General Copyright: https://github.com/CloudNebby/THE-LICENSE/blob/master/LICENSE.md/LICENSE.md
- *
- * Any component, part, etcetera are under the Live2D Inc.
- * https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html.
- * Those components are under Their License Agreement.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
- */
-
-/// Constant that holds the default value for the ParameterID.
-/// The default value specification are based on this [manual].
+/// Standard Cubism model parameter and hit area IDs.
 ///
-/// [manual] : https://docs.live2d.com/cubism-editor-manual/standard-parametor-list/
-class DefaultParameterID {
-  // Part ID
-  static const hitAreaPrefix = 'HitArea';
-  static const hitAreaHead = 'Head';
-  static const hitAreaBody = 'Body';
-  static const partsIdCore = 'Parts01Core';
-  static const partsArmPrefix = 'Parts01Arm_';
-  static const partsArmLPrefix = 'Parts01ArmL_';
-  static const partsArmRPrefix = 'Parts01ArmR_';
+/// Based on the standard Live2D Cubism manual:
+/// https://docs.live2d.com/cubism-editor-manual/standard-parametor-list/
+abstract class DefaultParameterID {
+  // Hit Areas
+  static const String hitAreaPrefix = 'HitArea';
+  static const String hitAreaHead = 'Head';
+  static const String hitAreaBody = 'Body';
 
-  // Parameter ID
-  static const paramAngleX = 'ParamAngleX';
-  static const paramAngleY = 'ParamAngleY';
-  static const paramAngleZ = 'ParamAngleZ';
-  static const paramEyeLOpen = 'ParamEyeLOpen';
-  static const paramEyeLSmile = 'ParamEyeLSmile';
-  static const paramEyeROpen = 'ParamEyeROpen';
-  static const paramEyeRSmile = 'ParamEyeRSmile';
-  static const paramEyeBallX = 'ParamEyeBallX';
-  static const paramEyeBallY = 'ParamEyeBallY';
-  static const paramEyeBallForm = 'ParamEyeBallForm';
-  static const paramBrowLY = 'ParamBrowLY';
-  static const paramBrowRY = 'ParamBrowRY';
-  static const paramBrowLX = 'ParamBrowLX';
-  static const paramBrowRX = 'ParamBrowRX';
-  static const paramBrowLAngle = 'ParamBrowLAngle';
-  static const paramBrowRAngle = 'ParamBrowRAngle';
-  static const paramBrowLForm = 'ParamBrowLForm';
-  static const paramBrowRForm = 'ParamBrowRForm';
-  static const paramMouthForm = 'ParamMouthForm';
-  static const paramMouthOpenY = 'ParamMouthOpenY';
-  static const paramCheek = 'ParamCheek';
-  static const paramBodyAngleX = 'ParamBodyAngleX';
-  static const paramBodyAngleY = 'ParamBodyAngleY';
-  static const paramBodyAngleZ = 'ParamBodyAngleZ';
-  static const paramBreath = 'ParamBreath';
-  static const paramArmLA = 'ParamArmLA';
-  static const paramArmRA = 'ParamArmRA';
-  static const paramArmLB = 'ParamArmLB';
-  static const paramArmRB = 'ParamArmRB';
-  static const paramHandL = 'ParamHandL';
-  static const paramHandR = 'ParamHandR';
-  static const paramHairFront = 'ParamHairFront';
-  static const paramHairSide = 'ParamHairSide';
-  static const paramHairBack = 'ParamHairBack';
-  static const paramHairFluffy = 'ParamHairFluffy';
-  static const paramShoulderY = 'ParamShoulderY';
-  static const paramBustX = 'ParamBustX';
-  static const paramBustY = 'ParamBustY';
-  static const paramBaseX = 'ParamBaseX';
-  static const paramBaseY = 'ParamBaseY';
-  static const paramNONE = 'NONE:';
+  // Parts
+  static const String partsIdCore = 'Parts01Core';
+  static const String partsArmPrefix = 'Parts01Arm_';
+  static const String partsArmLPrefix = 'Parts01ArmL_';
+  static const String partsArmRPrefix = 'Parts01ArmR_';
+
+  // Angles
+  static const String paramAngleX = 'ParamAngleX';
+  static const String paramAngleY = 'ParamAngleY';
+  static const String paramAngleZ = 'ParamAngleZ';
+
+  // Eyes
+  static const String paramEyeLOpen = 'ParamEyeLOpen';
+  static const String paramEyeLSmile = 'ParamEyeLSmile';
+  static const String paramEyeROpen = 'ParamEyeROpen';
+  static const String paramEyeRSmile = 'ParamEyeRSmile';
+  static const String paramEyeBallX = 'ParamEyeBallX';
+  static const String paramEyeBallY = 'ParamEyeBallY';
+  static const String paramEyeBallForm = 'ParamEyeBallForm';
+
+  // Eyebrows
+  static const String paramBrowLY = 'ParamBrowLY';
+  static const String paramBrowRY = 'ParamBrowRY';
+  static const String paramBrowLX = 'ParamBrowLX';
+  static const String paramBrowRX = 'ParamBrowRX';
+  static const String paramBrowLAngle = 'ParamBrowLAngle';
+  static const String paramBrowRAngle = 'ParamBrowRAngle';
+  static const String paramBrowLForm = 'ParamBrowLForm';
+  static const String paramBrowRForm = 'ParamBrowRForm';
+
+  // Mouth
+  static const String paramMouthForm = 'ParamMouthForm';
+  static const String paramMouthOpenY = 'ParamMouthOpenY';
+  static const String paramCheek = 'ParamCheek';
+
+  // Body
+  static const String paramBodyAngleX = 'ParamBodyAngleX';
+  static const String paramBodyAngleY = 'ParamBodyAngleY';
+  static const String paramBodyAngleZ = 'ParamBodyAngleZ';
+  static const String paramBreath = 'ParamBreath';
+
+  // Arms and Hands
+  static const String paramArmLA = 'ParamArmLA';
+  static const String paramArmRA = 'ParamArmRA';
+  static const String paramArmLB = 'ParamArmLB';
+  static const String paramArmRB = 'ParamArmRB';
+  static const String paramHandL = 'ParamHandL';
+  static const String paramHandR = 'ParamHandR';
+
+  // Hair
+  static const String paramHairFront = 'ParamHairFront';
+  static const String paramHairSide = 'ParamHairSide';
+  static const String paramHairBack = 'ParamHairBack';
+  static const String paramHairFluffy = 'ParamHairFluffy';
+
+  // Bust / Base
+  static const String paramShoulderY = 'ParamShoulderY';
+  static const String paramBustX = 'ParamBustX';
+  static const String paramBustY = 'ParamBustY';
+  static const String paramBaseX = 'ParamBaseX';
+  static const String paramBaseY = 'ParamBaseY';
+  static const String paramNone = 'NONE:';
 }
