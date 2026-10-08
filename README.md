@@ -1,14 +1,18 @@
-# live2d.dart
+<h1 align="center">Live2D</h1>
 
-[![Flutter](https://img.shields.io/badge/Flutter-3.0%2B-blue.svg)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/Dart-3.0%2B-0175C2.svg)](https://dart.dev)
-[![License](https://img.shields.io/badge/License-Custom-green.svg)](LICENSE)
+<div align="center">
+A high-performance, cross-platform Live2D Cubism viewer for Flutter.
 
-A high-performance, cross-platform **Live2D Cubism** viewer and controller for Flutter, powered by WebGL, PixiJS, and WebView.
+[![Pub Version](https://img.shields.io/pub/v/live2d?style=flat-square&logo=dart)](https://pub.dev/packages/live2d)
+[![Flutter](https://img.shields.io/badge/Flutter-3.0%2B-blue.svg?style=flat-square&logo=flutter)](https://flutter.dev)
+[![Dart SDK](https://img.shields.io/badge/Dart-3.0%2B-0175C2.svg?style=flat-square&logo=dart)](https://dart.dev)
+[![Live2D Cubism](https://img.shields.io/badge/Cubism-2.1%20%7C%204%20%7C%205-ff69b4.svg?style=flat-square)](https://www.live2d.com)
+[![License](https://img.shields.io/badge/License-Custom-green.svg?style=flat-square)](LICENSE)
 
-Brings anime avatars and interactive Live2D characters directly into your Flutter UI with transparent backgrounds, full touch interaction, motion/expression playback, and zero native NDK/C++ compilation headache.
+</div>
 
 ---
+
 
 ## ✨ Features
 
