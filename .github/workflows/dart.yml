@@ -1,65 +1,63 @@
 name: Publish to pub.dev
 
-# Flutter package (webview_flutter / WebGL).
-# Pub.dev → package → Admin → "Automated publishing" must be enabled with:
-#   repository:  Nebulino/live2d.dart
-#   tag pattern: v{{version}}
-# Then publish with:
-#   git tag v1.0.0 && git push origin v1.0.0
-# (`version:` in pubspec.yaml must match the tag, minus the leading "v")
+# Release gate: a version is published if and only if its tag is on `publish`.
 #
-# NOTE: `live2d` is not on pub.dev yet — the first publication must be done once
-# by hand (`flutter pub publish`) so the package exists and can be claimed by
-# the nebulino.cloud verified publisher. Only then configure automated publishing.
+# Flow
+#   1. bump `version:` in pubspec.yaml (+ CHANGELOG.md) and merge to `publish`
+#   2. git tag vX.Y.Z && git push origin vX.Y.Z
+#   3. the `guard` job refuses any tag whose commit is not on `publish`; only
+#      then does the official Dart reusable workflow authenticate with OIDC and
+#      run `dart pub publish -f` (it sets up Flutter too).
+#
+# Why the branch check lives here and not in `on: push: branches:` — pub.dev
+# only authorizes runs triggered by a *tag* push, never by a branch push.
+#
+# One-time setup: pub.dev → package → Admin → Automated publishing
+#   repository:  Nebulino/live2d.dart   (pub.dev package name: live2d)
+#   tag pattern: v{{version}}
 
 on:
-  # Manual run: in the GitHub UI pick the TAG as the ref, not a branch —
-  # OIDC only authorizes runs whose ref matches the tag pattern on pub.dev.
+  # Re-runs: pick the TAG as the ref in the GitHub UI, not a branch.
   workflow_dispatch:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
-      - 'v[0-9]+.[0-9]+.[0-9]+-*'
+      - 'v[0-9]+.[0-9]+.[0-9]+'      # v1.2.3   → pub.dev tag pattern: v{{version}}
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'    # v1.2.3-rc.1 (pre-release)
 
 concurrency:
   group: publish-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
+  guard:
+    name: Tag must be on publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Verify the tagged commit is on publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          branch=publish
+          if ! gh api "repos/${GITHUB_REPOSITORY}/branches/${branch}" >/dev/null 2>&1; then
+            echo "::error::Branch '${branch}' does not exist in ${GITHUB_REPOSITORY}."
+            exit 1
+          fi
+          status=$(gh api "repos/${GITHUB_REPOSITORY}/compare/${branch}...${GITHUB_SHA}" --jq .status)
+          echo "compare(${branch}...${GITHUB_SHA}) -> ${status}"
+          case "$status" in
+            identical|behind)
+              echo "::notice::${GITHUB_REF_NAME} (${GITHUB_SHA}) is on '${branch}'. Publishing." ;;
+            *)
+              echo "::error::Refusing to publish: ${GITHUB_REF_NAME} (${GITHUB_SHA}) is not on the '${branch}' branch (status: ${status})."
+              exit 1 ;;
+          esac
+
   publish:
+    needs: guard
     permissions:
       id-token: write   # required for OIDC authentication to pub.dev
       contents: read
-    # Official Dart Team reusable workflow: sets up Dart *and* Flutter, provides
-    # the OIDC token, runs `dart pub publish --dry-run` then `dart pub publish -f`.
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
-
-# ---------------------------------------------------------------------------
-# FALLBACK — Flutter variant of the k-paxian action (set `flutter: true`).
-# Replace the job above with this one only if OIDC publishing is unavailable:
-#
-#  publish:
-#    runs-on: ubuntu-latest
-#    permissions:
-#      contents: write
-#    steps:
-#      - uses: actions/checkout@v4
-#      - uses: subosito/flutter-action@v2
-#        with:
-#          channel: stable
-#          cache: true
-#      - run: flutter pub get
-#      - name: Publish on pub.dev
-#        id: publish_package
-#        uses: k-paxian/dart-package-publisher@master
-#        with:
-#          credentialJson: ${{ secrets.CREDENTIAL_JSON }}
-#          flutter: true
-#          force: true
-#      - name: Commit release tag
-#        if: steps.publish_package.outputs.success
-#        uses: hole19/git-tag-action@master
-#        env:
-#          TAG: ${{ steps.publish_package.outputs.package }}-${{ steps.publish_package.outputs.localVersion }}
-#          GITHUB_TOKEN: ${{ secrets.OAOTH_GITHUB_TOKEN }}
-# ---------------------------------------------------------------------------
