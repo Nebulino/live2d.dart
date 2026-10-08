@@ -7,7 +7,7 @@ A high-performance, cross-platform Live2D Cubism viewer for Flutter.
 [![Flutter](https://img.shields.io/badge/Flutter-3.0%2B-blue.svg?style=flat-square&logo=flutter)](https://flutter.dev)
 [![Dart SDK](https://img.shields.io/badge/Dart-3.0%2B-0175C2.svg?style=flat-square&logo=dart)](https://dart.dev)
 [![Live2D Cubism](https://img.shields.io/badge/Cubism-2.1%20%7C%204%20%7C%205-ff69b4.svg?style=flat-square)](https://www.live2d.com)
-[![License](https://img.shields.io/badge/License-Custom-green.svg?style=flat-square)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 
 </div>
 
@@ -207,5 +207,5 @@ controller.onHitStream.listen((hitAreas) => ...);
 
 ## ⚖️ License & Notice
 
-- This package is released under the [Nebulino Public License](LICENSE).
+- This package is released under the [MIT License](LICENSE).
 - **Live2D Cubism Notice**: The Live2D Cubism Core and Web SDK are proprietary technologies owned by [Live2D Inc.](https://www.live2d.com/) Please verify and comply with the [Live2D Software License Agreement](https://www.live2d.com/eula/live2d-open-software-license-agreement_en.html) when using Live2D models in commercial projects.
