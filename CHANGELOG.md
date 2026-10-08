@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.1] - 2026-10-08
+
+### Changed
+- Relicensed the package under the **MIT License** (was Nebulino Public License).
+- Added automated publishing to pub.dev via GitHub Actions (OIDC) with a
+  release gate on the `publish` branch.
+
 ## [1.0.0] - 2026-10-08
 
 ### Added

@@ -1,6 +1,6 @@
 name: live2d
 description: A high-performance, cross-platform Live2D Cubism viewer and controller for Flutter, powered by WebGL and WebView.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/Nebulino/live2d.dart
 repository: https://github.com/Nebulino/live2d.dart
 issue_tracker: https://github.com/Nebulino/live2d.dart/issues
