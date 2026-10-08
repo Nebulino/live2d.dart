@@ -27,6 +27,8 @@ Brings anime avatars and interactive Live2D characters directly into your Flutte
 - 🎯 **Hit Area Detection**: Listen for taps on model hit areas (e.g., `Head`, `Body`) via `onHit` callback or reactive stream.
 - ⚡ **Zero Native C++ Build Setup**: No need for Android NDK, CMake, or complex iOS CocoaPods compilation—runs smoothly on top of standard WebView and WebGL.
 
+📖 **Looking for a deep dive?** Read the comprehensive [Developer Guide](doc/GUIDE.md) covering architecture, asset management, and hit testing.
+
 ---
 
 ## 🚀 Getting Started

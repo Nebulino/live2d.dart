@@ -3,48 +3,54 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'live2d_asset_server.dart';
 import 'live2d_controller.dart';
 
-/// Flutter widget that renders Live2D Cubism models via WebGL and PixiJS.
+/// An interactive Flutter widget that renders Live2D Cubism models via WebGL and PixiJS.
+///
+/// Features a transparent background by default, allowing models to be easily placed
+/// inside a [Stack] above other Flutter widgets, gradients, and images.
 class Live2DViewer extends StatefulWidget {
-  /// The controller to command and inspect the Live2D model.
+  /// The controller used to inspect and command the Live2D model.
   final Live2DController controller;
 
-  /// Optional initial model to load automatically once the viewer is initialized.
+  /// An optional model URL or asset key to load immediately once initialized.
+  ///
   /// Can be:
-  /// - A remote HTTP/HTTPS URL (`https://.../model3.json`)
-  /// - A Flutter asset key (`assets/models/hiyori/hiyori.model3.json`)
+  /// - A remote HTTP/HTTPS URL (`https://.../model.model3.json`)
+  /// - A Flutter asset path (`assets/models/hiyori/hiyori.model3.json`)
   /// - A local file path (`/path/to/model.model3.json`)
   final String? initialModelUrl;
 
-  /// How the model should fit within the viewer area. Defaults to [Live2DFit.contain].
+  /// How the model adapts to the dimensions of the view. Defaults to [Live2DFit.contain].
   final Live2DFit fit;
 
-  /// Initial zoom / scale multiplier (default: 1.0).
+  /// The initial scale multiplier applied to the model. Defaults to 1.0.
   final double scale;
 
-  /// Whether the model should automatically follow pointer/touch events. Defaults to true.
+  /// Whether the model automatically turns its head and eyes to follow touch and cursor moves.
+  /// Defaults to `true`.
   final bool autoInteract;
 
-  /// Background color of the viewer. Transparent by default so it blends into Flutter UI.
+  /// The background color of the viewer surface. Defaults to [Colors.transparent].
   final Color backgroundColor;
 
-  /// Optional custom widget to show while a model is loading.
+  /// An optional builder for displaying a custom widget while a model is loading.
   final WidgetBuilder? loadingBuilder;
 
-  /// Optional custom widget to show when an error occurs.
+  /// An optional builder for rendering a custom error overlay when an error occurs.
   final Widget Function(BuildContext context, String error)? errorBuilder;
 
-  /// Optional custom CDN / URL for Cubism 4/5 Core JavaScript runtime.
+  /// An optional custom CDN or local URL for the Cubism 4/5 Core JavaScript runtime.
   final String? cubismCoreJsUrl;
 
-  /// Optional custom CDN / URL for Cubism 2.1 Core JavaScript runtime.
+  /// An optional custom CDN or local URL for the Cubism 2.1 Core JavaScript runtime.
   final String? cubism2CoreJsUrl;
 
-  /// Optional custom CDN / URL for Pixi.js runtime.
+  /// An optional custom CDN or local URL for the Pixi.js runtime.
   final String? pixiJsUrl;
 
-  /// Optional custom CDN / URL for pixi-live2d-display runtime.
+  /// An optional custom CDN or local URL for the pixi-live2d-display runtime.
   final String? pixiLive2dJsUrl;
 
+  /// Creates an interactive [Live2DViewer] widget.
   const Live2DViewer({
     super.key,
     required this.controller,

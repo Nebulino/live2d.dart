@@ -3,18 +3,31 @@ import 'package:flutter/services.dart';
 import 'package:mime/mime.dart';
 import 'html_template.dart';
 
-/// Lightweight embedded local HTTP server for serving Live2D HTML player,
-/// Flutter assets from [rootBundle], and local filesystem files without CORS restrictions.
+/// Lightweight embedded local HTTP server for serving the WebGL player and assets.
+///
+/// Binds to loopback IPv4 (`127.0.0.1`) on an ephemeral port. It serves:
+/// - The generated WebGL HTML player (`/index.html`)
+/// - Flutter assets from [rootBundle] (`/assets/*`)
+/// - Local files from the device filesystem (`/file/*`)
+///
+/// Automatically adds permissive CORS headers to prevent canvas and WebGL fetch errors.
 class Live2DAssetServer {
   HttpServer? _server;
   int _port = 0;
 
-  /// Custom URLs for runtime scripts (optional).
+  /// Custom URL for the Cubism 4/5 Core JavaScript runtime.
   final String? cubismCoreJsUrl;
+
+  /// Custom URL for the Cubism 2.1 Core JavaScript runtime.
   final String? cubism2CoreJsUrl;
+
+  /// Custom URL for the Pixi.js runtime.
   final String? pixiJsUrl;
+
+  /// Custom URL for the pixi-live2d-display runtime.
   final String? pixiLive2dJsUrl;
 
+  /// Creates a new [Live2DAssetServer].
   Live2DAssetServer({
     this.cubismCoreJsUrl,
     this.cubism2CoreJsUrl,
@@ -22,13 +35,13 @@ class Live2DAssetServer {
     this.pixiLive2dJsUrl,
   });
 
-  /// The active port of the local server.
+  /// The active loopback port of the local server.
   int get port => _port;
 
-  /// Base URL of the local server.
+  /// The base URL of the local server (`http://127.0.0.1:<port>`).
   String get baseUrl => 'http://127.0.0.1:$_port';
 
-  /// URL pointing to the WebGL player index.html.
+  /// The URL pointing directly to the WebGL player entry point (`index.html`).
   String get playerUrl => '$baseUrl/index.html';
 
   /// Starts the embedded HTTP server on an available loopback port.
@@ -43,8 +56,10 @@ class Live2DAssetServer {
     });
   }
 
-  /// Converts a Flutter asset path (e.g. 'assets/models/hiyori/hiyori.model3.json')
-  /// into a local HTTP URL that can be fetched by the WebGL player.
+  /// Converts a Flutter asset path into a local HTTP URL.
+  ///
+  /// For example, `assets/models/hiyori/hiyori.model3.json` becomes
+  /// `http://127.0.0.1:<port>/assets/models/hiyori/hiyori.model3.json`.
   String getAssetUrl(String assetPath) {
     var path = assetPath.trim();
     if (path.startsWith('/')) {
@@ -53,7 +68,10 @@ class Live2DAssetServer {
     return '$baseUrl/assets/$path';
   }
 
-  /// Converts a filesystem path into a local HTTP URL.
+  /// Converts a local filesystem path into a local HTTP URL.
+  ///
+  /// For example, `/sdcard/models/hiyori.model3.json` becomes
+  /// `http://127.0.0.1:<port>/file/sdcard/models/hiyori.model3.json`.
   String getFileUrl(String filePath) {
     var path = filePath.trim();
     if (path.startsWith('/')) {
